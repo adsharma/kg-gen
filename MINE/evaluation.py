@@ -7,7 +7,7 @@ from openai import OpenAI
 import os
 
 # Set OpenAI API key
-client = OpenAI(api_key="YOUR_OPENAI_KEY")
+client = OpenAI(api_key="fake", base_url="http://localhost:11434/v1")
 
 # Load JSON data
 def load_graph_from_json(file_path):
@@ -70,7 +70,7 @@ def gpt_evaluate_response(correct_answer, context):
     Respond with "1" if yes, and "0" if no. Do not provide any explanation, just the number.
     """
     response = client.chat.completions.create(
-        model="gpt-4",
+        model="qwen2.5:1m",
         messages=[{"role": "system", "content": "You are an evaluator that checks if the correct answer can be deduced from the information in the context."},
                   {"role": "user", "content": prompt}],
         max_tokens=1,
